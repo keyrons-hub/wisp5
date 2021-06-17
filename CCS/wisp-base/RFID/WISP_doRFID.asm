@@ -15,9 +15,7 @@
 ;/***********************************************************************************************************************************/
 
 ;/INCLUDES----------------------------------------------------------------------------------------------------------------------------
-    .cdecls C,LIST, "../globals.h"
-    .cdecls C,LIST, "../Math/crc16.h"
-    .cdecls C,LIST, "rfid.h"
+    .cdecls C,LIST, "../globals.h", "../Math/crc16.h", "rfid.h"
 	.def  WISP_doRFID
 	.global handleAck, handleQR, handleReqRN, handleRead, handleWrite, handleSelect, WISP_doRFID, TxClock, RxClock
 
@@ -125,6 +123,7 @@ keepDoingRFID:
 
 
 	; @todo Shouldn't we sleep_till_full_power here? Where else could that happen?
+	NOP
 	BIS		#LPM4+GIE, SR			;[] sleep! (LPM4 | GIE)
 	NOP
 
