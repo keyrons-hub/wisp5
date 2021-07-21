@@ -44,7 +44,7 @@ void WISP_init(void) {
 	WDTCTL = WDTPW | WDTHOLD;	// Stop watchdog timer
 
 	// Disable the GPIO power-on default high-impedance mode to activate previously configured port settings.
-	PM5CTL0 &= ~LOCKLPM5;		// Lock LPM5.
+	PM5CTL0 &= ~LOCKLPM5;		// Lock LPM5. doesn't mean that it's in LPM5 just following the initialization after a BOR or wakeup from LPMx.5 mode
 
 	// Disable FRAM wait cycles to allow clock operation over 8MHz
 	FRCTL0 = 0xA500 | ((1) << 4);  //FRCTLPW | NWAITS_1;

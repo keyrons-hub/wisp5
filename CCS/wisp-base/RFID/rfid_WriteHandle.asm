@@ -7,7 +7,11 @@
 ;*	@created
 ;*	@last rev
 ;*
-;*	@notes
+;*	@notes		WRITE: {CMD [8], MEMBANK [2], WordPtr [6?], Data [16], RN [16], CRC [16]}
+;*
+;*				*CMD - 11000011
+;*
+;*				RESPONSE: {Header [1], RN [16], CRC [16]}
 ;*
 ;*	@section
 ;*

@@ -7,7 +7,11 @@
 ;*	@created	6.8.11
 ;*	@last rev
 ;*
-;*	@notes
+;*	@notes		READ: {CMD [8], MEMBANK [2], WordPtr [6?], WordCount [8], Handle (RN) [16], CRC [16]}
+;*
+;*				*CMD - 11000010
+;*
+;*				RESPONSE: {Header [1], Data Read [VAR], Handle (RN) [16], CRC [16]}
 ;*
 ;*	@section
 ;*	@calling	void rfid_ReadHandle (void)

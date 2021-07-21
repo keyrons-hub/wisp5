@@ -7,7 +7,11 @@
 ;*	@last rev
 ;*
 ;*	@notes		In a blockwrite, data is transmitted in the clear (not cover coded by RN16)
-;*				BLOCKWRITE: {CMD [8], MEMBANK [2], WordPtr [6?], WordCount [8], Data [VAR], RN [16], CRC [16]}
+;*				BLOCKWRITE: {CMD [8], MEMBANK [2], WordPtr [6?], WordCount [8], Data [VAR], Handle (RN) [16], CRC [16]}
+;*
+;*				*CMD - 11000111
+;*
+;*			    RESPONSE: {Header [1], Handle (RN) [16], CRC [16]}
 ;*
 ;*	@section
 ;*/

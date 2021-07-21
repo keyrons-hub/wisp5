@@ -30,6 +30,13 @@ R_scratch0	.set	R15
 ; decrement slot counter if >0.
 ; if slot counter is 0, backscatter. that's it!
 ; all we backscatter is our RN16.
+;*
+;*	@notes		QueryRep: {CMD [2], Session [2]}
+;*
+;*				*CMD - 00
+;*
+;*				RESPONSE: {RN [16]}
+;*
 ;//***********************************************************************************************************************************
 handleQR:
 
@@ -144,6 +151,13 @@ QRTimingLoop:
 ; *
 ; *  @section	Entry Register Permissions
 ; *		- Until RX_SM is halted, R4-R9 are restricted.
+;*
+;*	@notes		Query: {CMD [4], DR [1], M [2], TRext [1], Sel [2], Session [2], Target [1], Q [4], CRC-5 [5]}
+;*
+;*				*CMD - 1000
+;*
+;*				RESPONSE: {RN [16]}
+;*
 ; */
 ;/***********************************************************************************************************************************/
 handleQuery:
@@ -277,6 +291,13 @@ doneQuery:
 ;	- Just Wait to Talk Back...
 ;	- Ignore DR,M,Sel,Session,Target,CRC5
 ;	- Generate a Slot Count, Update Handle, and Talk back if ready!
+;*
+;*	@notes		Ack: {CMD [2], RN [16]}
+;*
+;*				*CMD - 01
+;*
+;*				RESPONSE: {Combination of PC, XPC, EPC, and CRC-16 (see EPC C1G2 commands description)}
+;*
 ;//***********************************************************************************************************************************
 handleAck:
 
@@ -372,6 +393,13 @@ doneAck:
 ; - Act of Q
 ; - Pick a new slot count
 ; - if 0, backscatter
+;*
+;*	@notes		QueryAdjust: {CMD [4], Session [2], Decrement Count (UpDn) [3]}
+;*
+;*				*CMD - 1001
+;*
+;*				RESPONSE: {RN [16]}
+;*
 ;//***********************************************************************************************************************************
 handleQA:
 	;Wait for enough bits to parse Q (8) only need first two bits to uniquely identify Q.
@@ -479,6 +507,13 @@ QATimingLoop:
 
 ;*************************************************************************************************************************************
 ; REQ RN HANDLE
+;*
+;*	@notes		Req_RN: {CMD [8], Prior RN16 or handle [16], CRC [16]}
+;*
+;*				*CMD - 11000001
+;*
+;*				RESPONSE: {Handle or new RN [16], CRC [16]}
+;*
 ;*************************************************************************************************************************************
 handleReqRN:
 	;Avoid deadlock, check if we timed out------------------------------------------------------------------------------------------//
@@ -620,6 +655,13 @@ reqRN_badHandle:
 ; -#BitPtr has to equal 0x0020
 ; -#BitLength should equal 0x0010
 ;
+;*
+;*	@notes		Select: {CMD [4], Target [3], Action [3], MEMBANK [2], WordPtr [6?], Length [8], Mask [VAR], Truncate [1], CRC [16]}
+;*
+;*				*CMD - 1010
+;*
+;*				RESPONSE: None
+;*
 ;
 ;*************************************************************************************************************************************
 handleSelect:
